@@ -1,0 +1,45 @@
+services:
+  postgres:
+    image: postgres:15
+    container_name: liferay-postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: liferay
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: liferay_db
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - default
+
+  liferay:
+    image: liferay/dxp:2025.q1.1-lts
+    container_name: liferay1
+    ports:
+      - "8080:8080"
+    environment:
+      - LIFERAY_JDBC_DEFAULT_DRIVER_CLASS_NAME= org.postgresql.Driver
+      - LIFERAY_JDBC_DEFAULT_URL= jdbc:postgresql://postgres:5432/liferay_db
+      - LIFERAY_JDBC_DEFAULT_USERNAME= liferay
+      - LIFERAY_JDBC_DEFAULT_PASSWORD= password
+    depends_on:
+      - postgres
+    volumes:
+      - liferay-data::/opt/liferay/data
+      - liferay-logs:/opt/liferay/logs
+      - liferay-osgi:/opt/liferay/osgi
+      - liferay-database:/opt/liferay/database
+      - liferay-docker:/opt/liferay/docker
+      - liferay-deploy:/opt/liferay/deploy
+      - liferay-portal-ext.properties:/opt/liferay/portal-ext.properties
+    networks:
+      - default
+volumes:
+  postgres-data:
+  liferay-data:
+  liferay-logs:
+  liferay-osgi:
+  liferay-deploy:
+  liferay-docker:
+  liferay-database:
