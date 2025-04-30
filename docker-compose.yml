@@ -26,7 +26,7 @@ services:
     depends_on:
       - postgres
     volumes:
-      - liferay-data::/opt/liferay/data
+      - liferay-data:/opt/liferay/data
       - liferay-logs:/opt/liferay/logs
       - liferay-osgi:/opt/liferay/osgi
       - liferay-database:/opt/liferay/database
