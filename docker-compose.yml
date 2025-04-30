@@ -9,7 +9,7 @@ services:
       POSTGRES_PASSWORD: password
       POSTGRES_DB: liferay_db
     volumes:
-      - postgres-data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
     networks:
       - default
 
@@ -26,21 +26,19 @@ services:
     depends_on:
       - postgres
     volumes:
-      - liferay-data:/opt/liferay/data
-      - liferay-logs:/opt/liferay/logs
-      - liferay-deploy:/opt/liferay/deploy
-      - liferay-osgi:/opt/liferay/osgi
-      - ../liferay/data:/opt/liferay/data
-      - ../liferay/logs:/opt/liferay/logs
-      - ../liferay/database:/opt/liferay/database
-      - ../liferay/docker:/opt/liferay/docker
-      - ../liferay/deploy:/opt/liferay/deploy
-      - ../liferay/portal-ext.properties:/opt/liferay/portal-ext.properties
+      - liferay_data:/opt/liferay/data
+      - liferay_logs:/opt/liferay/logs
+      - liferay_deploy:/opt/liferay/deploy
+      - liferay_osgi:/opt/liferay/osgi
+      - liferay_config:/opt/liferay/home
     networks:
       - default
 volumes:
-  postgres-data:
-  liferay-data:
-  liferay-logs:
-  liferay-deploy:
-  liferay-osgi:
+  postgres_data:
+  liferay_data:
+  liferay_logs:
+  liferay_deploy:
+  liferay_osgi:
+  liferay_config:
+  liferay_home:
+  
