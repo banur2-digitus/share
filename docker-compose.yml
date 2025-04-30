@@ -26,13 +26,13 @@ services:
     depends_on:
       - postgres
     volumes:
-      - liferay-data:/opt/liferay/data
-      - liferay-logs:/opt/liferay/logs
-      - liferay-osgi:/opt/liferay/osgi
-      - liferay-database:/opt/liferay/database
-      - liferay-docker:/opt/liferay/docker
-      - liferay-deploy:/opt/liferay/deploy
-      - liferay-portal-ext.properties:/opt/liferay/portal-ext.properties
+      - ../liferay/data:/opt/liferay/data
+      - ../liferay/logs:/opt/liferay/logs
+      - ../liferay/osgi:/opt/liferay/osgi
+      - ../liferay/database:/opt/liferay/database
+      - ../liferay/docker:/opt/liferay/docker
+      - ../liferay/deploy:/opt/liferay/deploy
+      - ../liferay/portal-ext.properties:/opt/liferay/portal-ext.properties
     networks:
       - default
 volumes:
