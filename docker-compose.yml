@@ -28,7 +28,6 @@ services:
     volumes:
       - ../liferay/data:/opt/liferay/data
       - ../liferay/logs:/opt/liferay/logs
-      - ../liferay/osgi:/opt/liferay/osgi
       - ../liferay/database:/opt/liferay/database
       - ../liferay/docker:/opt/liferay/docker
       - ../liferay/deploy:/opt/liferay/deploy
@@ -39,7 +38,3 @@ volumes:
   postgres-data:
   liferay-data:
   liferay-logs:
-  liferay-osgi:
-  liferay-deploy:
-  liferay-docker:
-  liferay-database:
