@@ -11,7 +11,7 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:
-      - default
+      - shared-network
 
   liferay:
     image: liferay/dxp:2025.q1.1-lts
@@ -23,6 +23,7 @@ services:
       - LIFERAY_JDBC_DEFAULT_URL= jdbc:postgresql://postgres:5432/liferay_db
       - LIFERAY_JDBC_DEFAULT_USERNAME= liferay
       - LIFERAY_JDBC_DEFAULT_PASSWORD= password
+      - LIFERAY_VALID_HOSTS=liferay,139.59.78.220
     depends_on:
       - postgres
     volumes:
@@ -32,7 +33,24 @@ services:
       - liferay_osgi:/opt/liferay/osgi
       - liferay_config:/opt/liferay/home
     networks:
-      - default
+      - shared-network
+  
+  springboot-api:
+    build:
+      context: ./springboot-rfq-cx
+      dockerfile: Dockerfile
+    container_name: springboot-rfq-cx
+    ports:
+      - "8081:8081"
+    depends_on:
+      - liferay
+    networks:
+      - shared-network
+
+networks:
+  shared-network:
+    driver: bridge
+
 volumes:
   postgres_data:
   liferay_data:
